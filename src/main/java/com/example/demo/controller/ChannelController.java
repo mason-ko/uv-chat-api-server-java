@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.CreateChannelRequest;
 import com.example.demo.model.Channel;
 import com.example.demo.service.ChannelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class ChannelController {
     }
 
     @PostMapping
-    public Channel createChannel(@RequestBody Channel channel) {
+    public Channel createChannel(@RequestBody CreateChannelRequest channel) {
         return channelService.createChannel(channel);
     }
 
