@@ -31,6 +31,13 @@ public class UserService {
 
     // 사용자 생성
     public User createUser(User user) {
+        if (!user.getName().isEmpty()) {
+            Optional<User> u = userRepository.findByUserName(user.getName());
+            if (u.isPresent()) {
+                var v = u.get();
+                return this.updateUser(v.getId(), user);
+            }
+        }
         return userRepository.save(user);
     }
 
