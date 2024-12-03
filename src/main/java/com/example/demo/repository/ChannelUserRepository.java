@@ -10,6 +10,12 @@ import java.util.List;
 
 @Repository
 public interface ChannelUserRepository extends JpaRepository<ChannelUser, Long> {
-    @Query("SELECT cu FROM ChannelUser cu WHERE cu.userId IN :userIds")
-    List<ChannelUser> findByUserIds(@Param("userIds") List<Long> userIds);
+    @Query("""
+    SELECT cu.channelId
+    FROM ChannelUser cu
+    WHERE cu.userId IN (:userIds)
+    GROUP BY cu.channelId
+    HAVING COUNT(cu.userId) = 2
+""")
+    List<Long> findCommonChannelIds(@Param("userIds") List<Long> userIds);
 }

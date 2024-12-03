@@ -10,7 +10,7 @@ public class Channel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(nullable = false, unique = false, length = 100)
     private String name;  // 채널 이름
 
     @Column(columnDefinition = "TEXT")
@@ -19,7 +19,7 @@ public class Channel {
     @Column(nullable = false)
     private boolean isPrivate = false;  // 비공개 채널 여부
 
-    @Column(columnDefinition = "TEXT")
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String lastContent;  // 마지막 content
 
     private LocalDateTime createdAt;

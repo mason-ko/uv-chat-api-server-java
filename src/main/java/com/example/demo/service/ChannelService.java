@@ -39,12 +39,12 @@ public class ChannelService {
         }
 
         // 기존 채널 사용자 조회
-        List<ChannelUser> existingChannelUsers = channelUserRepository.findByUserIds(
+        List<Long> existingChannelUsers = channelUserRepository.findCommonChannelIds(
                 Arrays.asList(request.getUserId(), request.getTargetUserId())
         );
 
         if (!existingChannelUsers.isEmpty()) {
-            var existsCh = getChannelById(existingChannelUsers.getFirst().getChannelId());
+            var existsCh = getChannelById(existingChannelUsers.getFirst());
             if (existsCh.isEmpty()) {
                 throw new IllegalArgumentException("not found channel.");
             }
@@ -52,7 +52,7 @@ public class ChannelService {
         }
 
         // 새로운 채널 생성
-        Channel newChannel = new Channel();
+        Channel newChannel = new Channel("", "", true, "");
         newChannel = channelRepository.save(newChannel);  // 새 채널 저장
 
         // 채널 사용자 생성 및 저장
