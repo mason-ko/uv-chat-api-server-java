@@ -18,4 +18,12 @@ public interface ChannelUserRepository extends JpaRepository<ChannelUser, Long> 
     HAVING COUNT(cu.userId) = 2
 """)
     List<Long> findCommonChannelIds(@Param("userIds") List<Long> userIds);
+
+    @Query("""
+    SELECT cu.userId
+    FROM ChannelUser cu
+    WHERE cu.channelId = :channelId
+    AND cu.userId <> :userId
+""")
+    Long findUserIdInSameChannelWithDifferentIds(@Param("channelId") Long channelId, @Param("userId") Long userId);
 }

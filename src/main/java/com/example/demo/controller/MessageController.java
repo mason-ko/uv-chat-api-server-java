@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.CreateMessageRequest;
 import com.example.demo.model.Message;
 import com.example.demo.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class MessageController {
 
     // 메시지 생성
     @PostMapping
-    public Message createMessage(@RequestBody Message message) {
+    public Message createMessage(@RequestBody CreateMessageRequest message) {
         return messageService.createMessage(message);
     }
 
