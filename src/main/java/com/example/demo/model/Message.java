@@ -15,15 +15,8 @@ public class Message {
     private String content;
     private String translatedContent;
 
-    @Column(nullable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime createdAt;
-
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime updatedAt;
-
-    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime deletedAt;
 
     // 기본 생성자
